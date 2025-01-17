@@ -1,0 +1,33 @@
+# 忽略 Visual Studio 生成的文件
+*.obj
+*.exe
+*.pdb
+*.ilk
+*.sdf
+*.opensdf
+*.suo
+*.ipch
+
+# 忽略 Xcode 生成的文件
+*.xcodeproj
+*.xcworkspace
+build/
+DerivedData/
+
+# 忽略 CMake 生成的文件
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+CMakeLists.txt.user
+cmake-build-debug/
+
+# 忽略 GCC 或 Clang 生成的文件
+*.o
+*.d
+*.a
+*.so
+*.out
+
+# 忽略idea的中间文件
+.idea/
