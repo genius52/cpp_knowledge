@@ -17,24 +17,25 @@ class Thread_pool{
 public:
     Thread_pool(int num_threads){
         nums_ = num_threads;
-        for (size_t i = 0; i < num_threads; ++i) {
-            threads_.emplace_back([this] {
-                while (true) {
-                    std::function<void()> task;
-                    {
-                        std::unique_lock<std::mutex> lock(queue_mutex_);
-                        this->cv_.wait(lock, [this] {
-                            return this->stop_ ||!this->tasks_.empty();
-                        });
-                        if (this->stop_ && this->tasks_.empty()) {
-                            return;
-                        }
-                        task = std::move(this->tasks_.front());
-                        this->tasks_.pop();
+        std::thread t([this](){
+            while (true) {
+                std::function<void()> task;
+                {
+                    std::unique_lock<std::mutex> lock(queue_mutex_);
+                    this->cv_.wait(lock, [this] {
+                        return this->stop_ ||!this->tasks_.empty();
+                    });
+                    if (this->stop_ && this->tasks_.empty()) {
+                        return;
                     }
-                    task();
+                    task = std::move(this->tasks_.front());
+                    this->tasks_.pop();
                 }
-            });
+                task();
+            }
+        });
+        for (size_t i = 0; i < num_threads; ++i) {
+            threads_.emplace_back(std::move(t));
         }
     }
     ~Thread_pool(){

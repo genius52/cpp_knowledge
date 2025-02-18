@@ -1,9 +1,16 @@
 #include <iostream>
 #include "basic/typeid.hpp"
+#include "basic/oom.hpp"
 #include "thread/threadpool.hpp"
+
 // TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 int main() {
+    {
+        //申请太大的内存
+        auto ret = apply_big_memory();
+        std::cout<< ret<< std::endl;
+    }
     {
         //获取子类的数量
         using namespace check_typeid;
