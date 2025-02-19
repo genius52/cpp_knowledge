@@ -2,10 +2,31 @@
 #include "basic/typeid.hpp"
 #include "basic/oom.hpp"
 #include "thread/threadpool.hpp"
+#include "newcpp/stdany.hpp"
 
 // TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 int main() {
+    {
+        test_any();
+    }
+//    {
+//#define MEM_SIZE 320 * 1024 * 1024 * 1024
+//            char* addr = (char*) malloc((long)MEM_SIZE);
+//            printf("主线程调用malloc后，目前共申请了 32gb 的虚拟内存\n");
+//
+//            //循环频繁访问虚拟内存
+//            int idx = 1;
+//            try{
+//                while(1) {
+//                    printf("开始访问 32gb 大小的虚拟内存...\n");
+//                    memset(addr, idx, (long)MEM_SIZE);
+//                    idx++;
+//                }
+//            }catch(std::exception ex){
+//                std::cout<< ex.what()<<endl;
+//            }
+//    }
     {
         //申请太大的内存
         auto ret = apply_big_memory();
