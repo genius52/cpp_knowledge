@@ -1,12 +1,18 @@
 #include <iostream>
 #include "basic/typeid.hpp"
 #include "basic/oom.hpp"
+#include "basic/stackoverflow.hpp"
 #include "thread/threadpool.hpp"
 #include "newcpp/stdany.hpp"
 
 // TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
+
 int main() {
+    {
+        create_stackoverflow();
+    }
     {
         test_any();
     }
